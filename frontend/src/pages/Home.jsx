@@ -37,7 +37,6 @@ function Home () {
                             movie.title.toLowerCase().includes(searchQuery) && ( <MovieCard movie={movie} key={movie.id}/> )
                     )
                 }
-
             </div>
         </div>
     )
