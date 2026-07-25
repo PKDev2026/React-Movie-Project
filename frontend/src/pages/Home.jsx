@@ -1,4 +1,4 @@
-
+import "../css/Home.css"
 import MovieCard from "../components/MovieCard";
 import { useState } from "react";
 
@@ -7,9 +7,9 @@ function Home () {
     const [searchQuery, setSearchQuery] = useState("");
 
     const movies = [
-        {id: 1, title: "A New Hope", release_Date: "1977", url: ""},
-        {id: 2, title: "Empire Strikes Back", release_Date: "1980", url: ""},
-        {id: 3, title: "Return of the Jedi", release_Date: "1983", url: ""},
+        {id: 1, title: "A New Hope", release_Date: "1977", url: null},
+        {id: 2, title: "Empire Strikes Back", release_Date: "1980", url: null},
+        {id: 3, title: "Return of the Jedi", release_Date: "1983", url: null},
     ]
 
     const handleMovieSearch = (e) => {
