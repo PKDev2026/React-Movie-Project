@@ -1,16 +1,37 @@
 import "../css/Home.css"
 import MovieCard from "../components/MovieCard";
-import { useState } from "react";
+import { searchMovies, getPopularMovies } from "../services/api";
+import { useState, useEffect } from "react";
 
 function Home () {
 
     const [searchQuery, setSearchQuery] = useState("");
+    const [movies, setMovies] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const movies = [
-        {id: 1, title: "A New Hope", release_Date: "1977", url: null},
-        {id: 2, title: "Empire Strikes Back", release_Date: "1980", url: null},
-        {id: 3, title: "Return of the Jedi", release_Date: "1983", url: null},
-    ]
+    // const movies = [
+    //     {id: 1, title: "A New Hope", release_Date: "1977", url: null},
+    //     {id: 2, title: "Empire Strikes Back", release_Date: "1980", url: null},
+    //     {id: 3, title: "Return of the Jedi", release_Date: "1983", url: null},
+    // ]
+
+    useEffect(() => {
+        const loadPopularMovies = async () => {
+            try {
+                const popularMovies = await getPopularMovies();
+                setMovies(popularMovies);
+            } catch (error) {
+                console.log(error);
+                setError("Failed to get search result...");
+            }
+            finally {
+                setLoading(false)
+            }
+        }
+
+        loadPopularMovies()
+    }, []);
 
     const handleMovieSearch = (e) => {
         e.preventDefault(); // This will prevent the default behavior for the submit button since it normally refreshes the page
