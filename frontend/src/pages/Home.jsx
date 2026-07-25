@@ -67,9 +67,12 @@ function Home () {
                 <div className="loading">Loading...</div>
             ) : (
                 <div className="movies-grid">
-                    {movies.map((movie) => (
-                        <MovieCard movie={movie} key={movie.id} />
-                    ))}
+                    {
+                        movies.map (
+                            (movie) => 
+                                movie.title.toLowerCase().includes(searchQuery) && ( <MovieCard movie={movie} key={movie.id}/> )
+                        )
+                    }
                 </div>
             )}
         </div>
