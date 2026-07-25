@@ -3,7 +3,15 @@ import './App.css'
 function App() {
 
   return (
-    <div></div>
+    <div><AppText /></div>
+  )
+}
+
+function AppText() {
+  return (
+    <div>
+      <p>Hey There!</p>
+    </div>
   )
 }
 
