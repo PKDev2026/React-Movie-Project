@@ -10,12 +10,6 @@ function Home () {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // const movies = [
-    //     {id: 1, title: "A New Hope", release_Date: "1977", url: null},
-    //     {id: 2, title: "Empire Strikes Back", release_Date: "1980", url: null},
-    //     {id: 3, title: "Return of the Jedi", release_Date: "1983", url: null},
-    // ]
-
     useEffect(() => {
         const loadPopularMovies = async () => {
             try {
@@ -23,7 +17,7 @@ function Home () {
                 setMovies(popularMovies);
             } catch (error) {
                 console.log(error);
-                setError("Failed to get search result...");
+                setError("Failed to get movies...");
             }
             finally {
                 setLoading(false)
@@ -33,9 +27,24 @@ function Home () {
         loadPopularMovies()
     }, []);
 
-    const handleMovieSearch = (e) => {
+    const handleMovieSearch = async (e) => {
         e.preventDefault(); // This will prevent the default behavior for the submit button since it normally refreshes the page
-        alert(searchQuery);
+        if (!searchQuery.trim()) return
+        if (loading) return
+        setLoading(true)
+
+        try {
+            const searchResults = await searchMovies();
+            setMovies(searchResults);
+            setError(null);
+        } catch (error) {
+            console.log(error);
+            setError("Failed to get search result...");
+        }
+        finally {
+            setLoading(false)
+        }
+
         setSearchQuery(""); // Since the page won't reset, we will set the search query to empty again
     }
 
