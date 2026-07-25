@@ -3,14 +3,17 @@ import './App.css'
 function App() {
 
   return (
-    <div><AppText /></div>
+    <div>
+      <AppText text="Hey There!" />
+      <AppText text="Let's get started!" />
+    </div>
   )
 }
 
-function AppText() {
+function AppText({text}) {
   return (
     <div>
-      <p>Hey There!</p>
+      <p>{text}</p>
     </div>
   )
 }
